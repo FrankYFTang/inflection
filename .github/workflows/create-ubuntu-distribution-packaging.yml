@@ -73,6 +73,9 @@ jobs:
           make -j$(nproc)
       - name: Run tests
         run: |
+          export PKG_CONFIG_PATH=/usr/local/icu-${ICU_VERSION}/lib/pkgconfig:$PKG_CONFIG_PATH
+          export CPLUS_INCLUDE_PATH=/usr/local/icu-${ICU_VERSION}/include:$CPLUS_INCLUDE_PATH
+          export LD_LIBRARY_PATH=/usr/local/icu-${ICU_VERSION}/lib:$LD_LIBRARY_PATH
           cd inflection/build
           make -j$(nproc) check
       - name: Package with CPack
